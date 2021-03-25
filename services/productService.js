@@ -1,11 +1,23 @@
 const Cube = require('../models/cube')
 const uniqid = require ('uniqid')
 const fs = require('fs/promises')
-const productsData = require('../products.json');
 const path = require('path');
-const { callbackify } = require('util');
-function getAll () {
-    return productsData;
+
+const productsData = require('../products.json');
+
+function getAll (query) {
+    let result = productsData;
+
+    if(query.search) {
+        result = result.filter(x => x.name.toLowerCase().includes(query.search))
+    }
+    if(query.from){
+        result = result.filter(x => Number(x.level) >= query.from)
+    }
+    if(query.to){
+        result = result.filter(x => Number(x.level) <= query.to)
+    }
+    return result;
 }
 function getOne (id) {
     return productsData.find(x => x.id == id)
