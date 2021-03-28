@@ -6,7 +6,7 @@ const path = require('path');
 const productsData = require('../products.json');
 
 function getAll (query) {
-    let result = productsData;
+    let result = Cube.getAll();
 
     if(query.search) {
         result = result.filter(x => x.name.toLowerCase().includes(query.search))
@@ -20,7 +20,7 @@ function getAll (query) {
     return result;
 }
 function getOne (id) {
-    return productsData.find(x => x.id == id)
+    return Cube.getOne(id);
 }
 function createProduct (data, callback) {
     let cube = new Cube(
@@ -30,10 +30,9 @@ function createProduct (data, callback) {
         data.imageUrl, 
         data.difficultyLevel
     );
-    productsData.push(cube);
 
-    // fs.writeFile(path.join(__dirname + '/../products.json'), JSON.stringify(productsData),callback)
-        return fs.writeFile(path.join(__dirname + '/../products.json'), JSON.stringify(productsData))
+    return cube.save()
+
 }
 
 module.exports = {
