@@ -1,5 +1,4 @@
 const Cube = require('../models/cube')
-const uniqid = require ('uniqid')
 const fs = require('fs/promises')
 const path = require('path');
 
@@ -24,7 +23,6 @@ function getOne (id) {
 }
 function createProduct (data, callback) {
     let cube = new Cube(
-        uniqid(), 
         data.name, 
         data.description, 
         data.imageUrl, 
