@@ -4,22 +4,23 @@ const path = require('path');
 
 const productsData = require('../products.json');
 
-function getAll (query) {
+async function getAll (query) {
     // let result = Cube.getAll();
-
-    // if(query.search) {
-    //     result = result.filter(x => x.name.toLowerCase().includes(query.search))
-    // }
-    // if(query.from){
-    //     result = result.filter(x => Number(x.level) >= query.from)
-    // }
-    // if(query.to){
-    //     result = result.filter(x => Number(x.level) <= query.to)
-    // }
-    // return result;
+    let result = await Cube.find({}).lean();
+    if(query.search) {
+        result = result.filter(x => x.name.toLowerCase().includes(query.search))
+    }
+    if(query.from){
+        result = result.filter(x => Number(x.level) >= query.from)
+    }
+    if(query.to){
+        result = result.filter(x => Number(x.level) <= query.to)
+    }
+    return result;
 }
-function getOne (id) {
-    // return Cube.getOne(id);
+async function getOne (id) {
+    let cube = await Cube.findById(id).lean();
+    return cube;
 }
 function createProduct (data) {
     let cube = new Cube(data);

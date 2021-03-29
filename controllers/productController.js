@@ -3,9 +3,12 @@ const router = Router();
 const productService = require('../services/productService')
 router.get('/', (req, res) => {
 
-    let products = productService.getAll(req.query);
-    
-    res.render('home', {title: 'Home', products})
+    let products = productService.getAll(req.query)
+    .then(products => {
+        res.render('home', {title: 'Home', products})
+
+    })
+
 });
 
 router.get('/create', (req, res) => {
@@ -27,8 +30,8 @@ router.post('/create', (req, res) => {
     })
 }
 );
-router.get('/details/:productId', (req, res) => {
-    let product = productService.getOne(req.params.productId);
+router.get('/details/:productId', async (req, res) => {
+    let product = await productService.getOne(req.params.productId)
     res.render('details', { ...product })
 })
 
