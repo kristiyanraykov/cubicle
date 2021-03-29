@@ -1,8 +1,6 @@
 const Cube = require('../models/cube')
-const fs = require('fs/promises')
-const path = require('path');
 
-const productsData = require('../products.json');
+const Accessory = require('../models/Accessory');
 
 async function getAll (query) {
     // let result = Cube.getAll();
@@ -29,8 +27,17 @@ function createProduct (data) {
 
 }
 
+async function attachAccessory(productId, accessoryId) {
+    let product = await Cube.findById(productId)
+    let accessory = await Accessory.findById(accessoryId)
+
+    product.accessories.push(accessory);
+    product.save()
+}
+
 module.exports = {
     create: createProduct,
     getAll,
-    getOne
+    getOne,
+    attachAccessory
 }
