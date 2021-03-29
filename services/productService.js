@@ -5,29 +5,24 @@ const path = require('path');
 const productsData = require('../products.json');
 
 function getAll (query) {
-    let result = Cube.getAll();
+    // let result = Cube.getAll();
 
-    if(query.search) {
-        result = result.filter(x => x.name.toLowerCase().includes(query.search))
-    }
-    if(query.from){
-        result = result.filter(x => Number(x.level) >= query.from)
-    }
-    if(query.to){
-        result = result.filter(x => Number(x.level) <= query.to)
-    }
-    return result;
+    // if(query.search) {
+    //     result = result.filter(x => x.name.toLowerCase().includes(query.search))
+    // }
+    // if(query.from){
+    //     result = result.filter(x => Number(x.level) >= query.from)
+    // }
+    // if(query.to){
+    //     result = result.filter(x => Number(x.level) <= query.to)
+    // }
+    // return result;
 }
 function getOne (id) {
-    return Cube.getOne(id);
+    // return Cube.getOne(id);
 }
-function createProduct (data, callback) {
-    let cube = new Cube(
-        data.name, 
-        data.description, 
-        data.imageUrl, 
-        data.difficultyLevel
-    );
+function createProduct (data) {
+    let cube = new Cube(data);
 
     return cube.save()
 
