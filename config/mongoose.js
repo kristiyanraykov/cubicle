@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 
 
 module.exports = (app) => {
-    mongoose.connect('mongodb+srv://kraykov:64935747@cluster0.styjx.mongodb.net/cubicle?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect('mongo "mongodb+srv://cluster0.styjx.mongodb.net/myFirstDatabase" --username kraykov', {useNewUrlParser: true, useUnifiedTopology: true});
 
     const db = mongoose.connection;
 
