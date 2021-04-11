@@ -20,6 +20,11 @@ async function getOne (id) {
     let cube = await Cube.findById(id).lean();
     return cube;
 }
+
+async function  getOnewithAccessories(id){
+    let cube = await Cube.findById(id).populate('accessories').lean();
+    return cube;
+}
 function createProduct (data) {
     let cube = new Cube(data);
 
@@ -39,5 +44,6 @@ module.exports = {
     create: createProduct,
     getAll,
     getOne,
-    attachAccessory
+    attachAccessory,
+    getOnewithAccessories,
 }
